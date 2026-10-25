@@ -2,6 +2,7 @@
 
 load_lalonde()  NSW treated units plus a comparison group ("experimental", "psid" or "cps"), Modules 1-6
 show()          print a table with text columns left-aligned, numbers right-aligned
+draw_dag()      draw a causal diagram (boxes and arrows) on a matplotlib axis, Module 2 onwards
 """
 from pathlib import Path
 
@@ -61,3 +62,27 @@ def show(df: pd.DataFrame, index: bool = False) -> None:
     print("  ".join(pad(h, w, t) for h, w, t in zip(cols, widths, is_text)).rstrip())
     for r in range(len(df)):
         print("  ".join(pad(col[r], w, t) for col, w, t in zip(cells, widths, is_text)).rstrip())
+
+
+def draw_dag(ax, nodes: dict, edges: list, title: str = "", dashed: tuple = (), colors: dict | None = None) -> None:
+    """Draw a causal diagram: nodes = {name: (x, y)}, edges = [(from, to), ...].
+
+    dashed: names of unmeasured nodes (dashed box). colors: {name: box colour}.
+    """
+    from matplotlib.patches import FancyArrowPatch
+    colors = colors or {}
+    boxes = {}
+    for name, (x, y) in nodes.items():
+        boxes[name] = ax.text(x, y, name, ha="center", va="center", fontsize=9, zorder=3,
+                              bbox=dict(boxstyle="round,pad=0.4", fc=colors.get(name, "white"), ec="black",
+                                        lw=1, ls="--" if name in dashed else "-"))
+    for a, b in edges:
+        # Clip each arrow to the two boxes' edges, so arrowheads are never hidden behind a box.
+        ax.add_patch(FancyArrowPatch(nodes[a], nodes[b], arrowstyle="-|>", mutation_scale=14, lw=1.2,
+                                     color="black", patchA=boxes[a].get_bbox_patch(), patchB=boxes[b].get_bbox_patch(),
+                                     shrinkA=2, shrinkB=2, zorder=4, ls="--" if a in dashed or b in dashed else "-"))
+    xs, ys = zip(*nodes.values())
+    ax.set_xlim(min(xs) - 0.8, max(xs) + 0.8)
+    ax.set_ylim(min(ys) - 0.6, max(ys) + 0.6)
+    ax.set_title(title, fontsize=10)
+    ax.axis("off")

@@ -12,6 +12,7 @@ The program, progress table and per-module detail are in
 | # | Notebook | Topic | Data |
 |---|----------|-------|------|
 | 1 | `01_potential_outcomes.ipynb` | Potential outcomes, ATE / ATT / ATC, naive difference = effect + selection bias | NSW + PSID |
+| 2 | `02_dags.ipynb` | DAGs: confounders, mediators, colliders, good and bad controls | Made-up numbers + NSW + PSID |
 
 Related repos: [A/B Testing Playbook](https://github.com/omri-sabag83/A-B-Testing-Playbook),
 [Product Analytics Playbook](https://github.com/omri-sabag83/Product-Analytics-Playbook),

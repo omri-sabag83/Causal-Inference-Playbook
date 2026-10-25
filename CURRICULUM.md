@@ -19,14 +19,14 @@ Where a module here overlaps them, it recaps and links instead of rebuilding.
 
 ## Progress
 
-`🟩⬜⬜⬜⬜⬜⬜⬜⬜⬜⬜` **9% complete (1/11 modules)**
+`🟩🟩⬜⬜⬜⬜⬜⬜⬜⬜⬜` **18% complete (2/11 modules)**
 
 ⬜ Not started · 🟨 In progress · 🟩 Completed
 
 | # | Module | Data | Status | Completed On |
 |---|--------|------|--------|---------------|
 | 1 | Potential Outcomes Framework | NSW job training (shared) | 🟩 Completed | 2026-10-25 |
-| 2 | DAGs: Confounders, Colliders, Mediators | NSW job training (shared) + simulation | ⬜ Not started | |
+| 2 | DAGs: Confounders, Colliders, Mediators | NSW job training (shared) + made-up numbers | 🟩 Completed | 2026-10-25 |
 | 3 | Confounding & Regression Adjustment | NSW job training (shared) | ⬜ Not started | |
 | 4 | Matching, incl. Propensity Score Matching | NSW job training (shared) | ⬜ Not started | |
 | 5 | Weighting: IPW and Doubly Robust | NSW job training (shared) | ⬜ Not started | |
@@ -118,3 +118,52 @@ Fully worked.
 
 **Interview angle:** "Users who adopted feature X retain better. Did X cause
 it?"
+
+## <u>Module 2 — DAGs: Confounders, Colliders, Mediators</u>
+
+**Concepts**
+- A DAG (directed acyclic graph): a drawing of what causes what. Arrows point
+  from cause to effect, and following the arrows never leads back to where
+  you started.
+- Three shapes:
+  1. Confounder: one thing affects both who gets the treatment and the outcome.
+  2. Mediator: the treatment works through it.
+  3. Collider: both the treatment and the outcome affect it.
+- Adjusting for a column: comparing like with like on it (only men with the
+  same value are compared). Good and bad controls (columns to adjust for or
+  not): adjust for confounders. Don't adjust for a mediator when you want the
+  whole effect, and never for a collider or anything the treatment changed.
+- An unmeasured confounder: a box in the drawing with no column in the data.
+
+**Why it matters**
+"Adjust for everything" is wrong advice. Adjusting for the wrong column can
+create an effect that isn't there, or hide one that is. The drawing decides
+which columns to adjust for, before any number is computed.
+
+**Worked example**
+1. Three small examples on made-up numbers with a known true effect, one
+   per shape: adjusting helps for the confounder and hurts for the mediator
+   and the collider.
+2. NSW (National Supported Work) job-training data vs the PSID (Panel Study
+   of Income Dynamics) survey men, real data: adjusting for more and more
+   confounders moves the naive gap (a plain comparison of the two groups),
+   (−$15,204.8), toward the experiment's $1,794.3,
+   until the groups get too small to go further.
+3. A bad control on the real experiment: keeping only the men who had a job
+   in 1978 shrinks $1,794.3 to $1,340.8.
+
+**Resources**
+- [Causal Inference: The Mixtape, ch. 3 "Directed Acyclic Graphs"](https://mixtape.scunning.com/03-Directed_Acyclical_Graphs.html)
+  (Scott Cunningham, ~45 min, verified): drawing DAGs, confounders, colliders.
+- [The Effect, ch. 8 "Causal Paths and Closing Back Doors"](https://theeffectbook.net/ch-CausalPaths.html)
+  (Nick Huntington-Klein, ~40 min, verified): which columns to adjust for,
+  colliders.
+- [A Crash Course in Good and Bad Controls](https://ftp.cs.ucla.edu/pub/stat_ser/r493.pdf)
+  (Cinelli, Forney & Pearl, ~45 min, verified): which columns to adjust for,
+  case by case.
+
+**Exercise type:** which single column removes the most bias, and is a column
+measured during the program a good control? Fully worked.
+
+**Interview angle:** "Should we control for the number of sessions last week
+when measuring the effect of feature X?"
