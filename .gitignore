@@ -1,0 +1,11 @@
+.ipynb_checkpoints/
+__pycache__/
+.DS_Store
+PLAN*.md
+
+# Public datasets with unclear redistribution licences: never committed.
+# data/get_data.py downloads and verifies them.
+data/raw/
+
+# Local build helpers (notebook builders, number checks)
+_build/
