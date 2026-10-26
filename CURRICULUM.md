@@ -19,7 +19,7 @@ Where a module here overlaps them, it recaps and links instead of rebuilding.
 
 ## Progress
 
-`🟩🟩⬜⬜⬜⬜⬜⬜⬜⬜⬜` **18% complete (2/11 modules)**
+`🟩🟩🟩⬜⬜⬜⬜⬜⬜⬜⬜` **27% complete (3/11 modules)**
 
 ⬜ Not started · 🟨 In progress · 🟩 Completed
 
@@ -27,7 +27,7 @@ Where a module here overlaps them, it recaps and links instead of rebuilding.
 |---|--------|------|--------|---------------|
 | 1 | Potential Outcomes Framework | NSW job training (shared) | 🟩 Completed | 2026-10-25 |
 | 2 | DAGs: Confounders, Colliders, Mediators | NSW job training (shared) + made-up numbers | 🟩 Completed | 2026-10-25 |
-| 3 | Confounding & Regression Adjustment | NSW job training (shared) | ⬜ Not started | |
+| 3 | Confounding & Regression Adjustment | NSW job training (shared) | 🟩 Completed | 2026-10-26 |
 | 4 | Matching, incl. Propensity Score Matching | NSW job training (shared) | ⬜ Not started | |
 | 5 | Weighting: IPW and Doubly Robust | NSW job training (shared) | ⬜ Not started | |
 | 6 | Difference-in-Differences | NSW job training (shared) + castle-doctrine panel | ⬜ Not started | |
@@ -167,3 +167,53 @@ measured during the program a good control? Fully worked.
 
 **Interview angle:** "Should we control for the number of sessions last week
 when measuring the effect of feature X?"
+
+## <u>Module 3 — Confounding & Regression Adjustment</u>
+
+**Concepts**
+- Regression: a formula, fitted to data, that predicts one column (1978
+  earnings) from other columns. Each column gets a coefficient: how much the
+  prediction moves when that column goes up by 1 and the others stay the same.
+- Regression adjustment for the ATT (average treatment effect on the
+  treated), in three steps:
+  1. Fit the formula on the comparison men only, who never took the program.
+  2. Use it to predict each treated man's 1978 earnings without the program.
+  3. The effect estimate is the mean of (actual with the program − predicted without it) over the treated men.
+- The common shortcut: one regression on all men, with "took the program"
+  as one more column.
+- What regression assumes: every confounder has a column, and the formula's
+  shape is right.
+- Extrapolation: where no comparison man looks like a treated man, the
+  formula still gives a prediction, by continuing its shape past the data.
+  Nothing in the data checks that guess.
+
+**Why it matters**
+Splitting men into groups runs out of men after a few columns. Regression
+uses every column at once, which is why it's the default tool. But it always
+returns a number, even where the groups don't overlap, so the analyst has to
+check where its answer comes from.
+
+**Worked example**
+1. Seven men on made-up numbers: the three steps by hand, and how the answer
+   changes when the formula's guess beyond the data is wrong.
+2. NSW (National Supported Work) job-training data vs the PSID (Panel Study
+   of Income Dynamics) men: regression adjustment with all 8 "before"
+   columns, with a 95% confidence interval.
+3. The same 8 columns in four reasonable formula shapes, a check of each
+   shape on the PSID men who look most like the treated men, and a direct
+   test on the men kept out by the lottery.
+
+**Resources**
+- [Causal Inference: The Mixtape, ch. 5 "Unconfoundedness"](https://mixtape.scunning.com/05-causal_cross_sectional_designs)
+  (Scott Cunningham, ~45 min for sections 5.9–5.10, verified): regression
+  adjustment, and the same NSW data.
+- [The Effect, ch. 13 "Regression"](https://theeffectbook.net/ch-StatisticalAdjustment.html)
+  (Nick Huntington-Klein, ~60 min, verified): what a coefficient means, and
+  adjusting for columns with regression.
+
+**Exercise type:** redo the regression adjustment with the CPS (Current
+Population Survey, a monthly US labour survey) comparison group, in two
+shapes, and check each shape. Fully worked.
+
+**Interview angle:** "Our regression says users with feature X are 5 points
+more likely to keep using the app, with controls. Is that the effect of X?"
