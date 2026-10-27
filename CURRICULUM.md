@@ -19,7 +19,7 @@ Where a module here overlaps them, it recaps and links instead of rebuilding.
 
 ## Progress
 
-`🟩🟩🟩🟩⬜⬜⬜⬜⬜⬜⬜` **36% complete (4/11 modules)**
+`🟩🟩🟩🟩🟩⬜⬜⬜⬜⬜⬜` **45% complete (5/11 modules)**
 
 ⬜ Not started · 🟨 In progress · 🟩 Completed
 
@@ -29,7 +29,7 @@ Where a module here overlaps them, it recaps and links instead of rebuilding.
 | 2 | DAGs: Confounders, Colliders, Mediators | NSW job training (shared) + made-up numbers | 🟩 Completed | 2026-10-25 |
 | 3 | Confounding & Regression Adjustment | NSW job training (shared) | 🟩 Completed | 2026-10-26 |
 | 4 | Matching, incl. Propensity Score Matching | NSW job training (shared) | 🟩 Completed | 2026-10-27 |
-| 5 | Weighting: IPW and Doubly Robust | NSW job training (shared) | ⬜ Not started | |
+| 5 | Weighting: IPW (Inverse Probability Weighting) and Doubly Robust | NSW job training (shared) | 🟩 Completed | 2026-10-27 |
 | 6 | Difference-in-Differences | NSW job training (shared) + castle-doctrine panel | ⬜ Not started | |
 | 7 | Instrumental Variables | Card (1995) college proximity | ⬜ Not started | |
 | 8 | Regression Discontinuity Design | Minimum legal drinking age | ⬜ Not started | |
@@ -261,3 +261,63 @@ the matches. Fully worked.
 **Interview angle:** "We matched users who used feature X to similar users
 who didn't, using a propensity score. The matched users with X spend 10%
 more. Is that the effect of X?"
+
+## <u>Module 5 — Weighting: IPW (Inverse Probability Weighting) and Doubly Robust</u>
+
+**Concepts**
+- A man's propensity score, as in Module 4: take the men, treated and
+  comparison, whose "before" columns are like his. His score is the share
+  of treated men among them.
+- IPW (inverse probability weighting) for the ATT (average treatment effect
+  on the treated): every comparison man stays in, with a weight, (his score)
+  ÷ (1 − his score): the number of treated men he stands in for. Each
+  treated man counts once.
+- The weighted mean of the comparison men's 1978 earnings (after the
+  program) stands in for the
+  treated men's mean without the program.
+- Balance check: after weighting, compare the mean of every "before" column
+  for the treated men and for the weighted comparison men. Also, how much of
+  the weight a few men carry.
+- Doubly robust uses two formulas:
+  1. The score formula: the fitted formula that gives each man's
+     propensity score.
+  2. The earnings formula: regression adjustment's straight-line formula,
+     fitted on the comparison men, which predicts each treated man's 1978
+     earnings without the program (Module 3).
+
+  The doubly robust estimate is regression adjustment's estimate minus
+  the earnings formula's weighted mean miss (actual − predicted earnings)
+  on the comparison men. It gets the right answer, apart from chance, if
+  either formula is right.
+
+**Why it matters**
+Weighting keeps every comparison man. Unlike matching (Module 4), it
+doesn't pair each treated man with one closest comparison man. It also
+gives almost no weight to the comparison men unlike every treated man,
+without a cut-off chosen by hand (such as "drop every comparison man below a
+given score"). Doubly robust is right if
+either of its two formulas is right, and its correction shows when the
+earnings formula is wrong.
+
+**Worked example**
+1. NSW (National Supported Work) job-training data vs the PSID (Panel Study
+   of Income Dynamics) men: the weights, where they go, the balance check
+   and the effect estimate, with a 95% confidence interval.
+2. Doubly robust on the same data, next to regression adjustment and
+   weighting.
+
+**Resources**
+- [Causal Inference: The Mixtape, ch. 5 "Unconfoundedness"](https://mixtape.scunning.com/05-causal_cross_sectional_designs)
+  (Scott Cunningham, ~30 min for section 5.8 "Estimation with Inverse
+  Probability Weighting", verified): IPW on the same NSW data.
+- [The Effect, ch. 14 "Matching"](https://theeffectbook.net/ch-Matching.html)
+  (Nick Huntington-Klein, ~40 min for sections 14.5 and 14.7.2, verified):
+  propensity score weighting, and doubly robust estimation.
+
+**Exercise type:** redo weighting and doubly robust with the CPS (Current
+Population Survey, a monthly US labour survey) comparison group. Fully
+worked.
+
+**Interview angle:** "Users who turned on feature X spend 10% more. We
+weighted the users without X to look like the users with X, using a
+propensity score, and the gap is still 10%. Is that the effect of X?"
