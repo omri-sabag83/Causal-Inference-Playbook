@@ -19,7 +19,7 @@ Where a module here overlaps them, it recaps and links instead of rebuilding.
 
 ## Progress
 
-`🟩🟩🟩⬜⬜⬜⬜⬜⬜⬜⬜` **27% complete (3/11 modules)**
+`🟩🟩🟩🟩⬜⬜⬜⬜⬜⬜⬜` **36% complete (4/11 modules)**
 
 ⬜ Not started · 🟨 In progress · 🟩 Completed
 
@@ -28,7 +28,7 @@ Where a module here overlaps them, it recaps and links instead of rebuilding.
 | 1 | Potential Outcomes Framework | NSW job training (shared) | 🟩 Completed | 2026-10-25 |
 | 2 | DAGs: Confounders, Colliders, Mediators | NSW job training (shared) + made-up numbers | 🟩 Completed | 2026-10-25 |
 | 3 | Confounding & Regression Adjustment | NSW job training (shared) | 🟩 Completed | 2026-10-26 |
-| 4 | Matching, incl. Propensity Score Matching | NSW job training (shared) | ⬜ Not started | |
+| 4 | Matching, incl. Propensity Score Matching | NSW job training (shared) | 🟩 Completed | 2026-10-27 |
 | 5 | Weighting: IPW and Doubly Robust | NSW job training (shared) | ⬜ Not started | |
 | 6 | Difference-in-Differences | NSW job training (shared) + castle-doctrine panel | ⬜ Not started | |
 | 7 | Instrumental Variables | Card (1995) college proximity | ⬜ Not started | |
@@ -217,3 +217,47 @@ shapes, and check each shape. Fully worked.
 
 **Interview angle:** "Our regression says users with feature X are 5 points
 more likely to keep using the app, with controls. Is that the effect of X?"
+
+## <u>Module 4 — Matching, incl. Propensity Score Matching</u>
+
+**Concepts**
+- Matching: for each treated man (a man who took the program in 1976–77),
+  find his match: the comparison man who looked most like him before the
+  program. His match's 1978 earnings stand in for his earnings without the
+  program.
+- The propensity score: among all the men, treated and comparison, with
+  "before" columns like his, the share who were treated. It's computed from
+  his columns alone, not from which group he's actually in. Matching on this one number instead of on all
+  the columns is propensity score matching.
+- Balance check: after matching, compare the mean of every "before" column
+  for the treated men and for their matches.
+- Overlap: matching only works for treated men who have comparison men with
+  a similar score.
+
+**Why it matters**
+Matching uses only the comparison men chosen as matches, and the analyst can
+see each match. So it shows plainly how alike the groups were made, and which
+treated men had nobody like them.
+
+**Worked example**
+1. NSW (National Supported Work) job-training data vs the PSID (Panel Study
+   of Income Dynamics) men: the score, the matches, the balance check and
+   the effect estimate, with a 95% confidence interval.
+2. Matching vs regression adjustment on the same data, and why they
+   differ.
+
+**Resources**
+- [Causal Inference: The Mixtape, ch. 5 "Unconfoundedness"](https://mixtape.scunning.com/05-causal_cross_sectional_designs)
+  (Scott Cunningham, ~60 min for sections 5.5–5.8, verified): exact
+  matching, nearest-neighbour matching and the propensity score.
+- [The Effect, ch. 14 "Matching"](https://theeffectbook.net/ch-Matching.html)
+  (Nick Huntington-Klein, ~60 min, verified): matching, the propensity
+  score, overlap and balance checks.
+
+**Exercise type:** redo the propensity score matching with the CPS (Current
+Population Survey, a monthly US labour survey) comparison group, and check
+the matches. Fully worked.
+
+**Interview angle:** "We matched users who used feature X to similar users
+who didn't, using a propensity score. The matched users with X spend 10%
+more. Is that the effect of X?"
