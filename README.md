@@ -16,6 +16,7 @@ The program, progress table and per-module detail are in
 | 3 | `03_regression_adjustment.ipynb` | Regression adjustment for the ATT, formula shape, extrapolation | Made-up numbers + NSW + PSID + CPS |
 | 4 | `04_matching.ipynb` | Propensity score matching, overlap, balance checks, matching vs regression | NSW + PSID + CPS |
 | 5 | `05_weighting.ipynb` | Inverse probability weighting, where the weight goes, doubly robust | NSW + PSID + CPS |
+| 6 | `06_difference_in_differences.ipynb` | DiD, parallel trends checked against the lottery, DiD with weighting, laws passed in different years | NSW + PSID + CPS + castle-doctrine state panel |
 
 Related repos: [A/B Testing Playbook](https://github.com/omri-sabag83/A-B-Testing-Playbook),
 [Product Analytics Playbook](https://github.com/omri-sabag83/Product-Analytics-Playbook),

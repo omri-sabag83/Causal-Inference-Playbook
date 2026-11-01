@@ -19,7 +19,7 @@ Where a module here overlaps them, it recaps and links instead of rebuilding.
 
 ## Progress
 
-`🟩🟩🟩🟩🟩⬜⬜⬜⬜⬜⬜` **45% complete (5/11 modules)**
+`🟩🟩🟩🟩🟩🟩⬜⬜⬜⬜⬜` **55% complete (6/11 modules)**
 
 ⬜ Not started · 🟨 In progress · 🟩 Completed
 
@@ -30,7 +30,7 @@ Where a module here overlaps them, it recaps and links instead of rebuilding.
 | 3 | Confounding & Regression Adjustment | NSW job training (shared) | 🟩 Completed | 2026-10-26 |
 | 4 | Matching, incl. Propensity Score Matching | NSW job training (shared) | 🟩 Completed | 2026-10-27 |
 | 5 | Weighting: IPW (Inverse Probability Weighting) and Doubly Robust | NSW job training (shared) | 🟩 Completed | 2026-10-27 |
-| 6 | Difference-in-Differences | NSW job training (shared) + castle-doctrine panel | ⬜ Not started | |
+| 6 | Difference-in-Differences | NSW job training (shared) + castle-doctrine panel | 🟩 Completed | |
 | 7 | Instrumental Variables | Card (1995) college proximity | ⬜ Not started | |
 | 8 | Regression Discontinuity Design | Minimum legal drinking age | ⬜ Not started | |
 | 9 | Synthetic Control | California Proposition 99 | ⬜ Not started | |
@@ -321,3 +321,75 @@ worked.
 **Interview angle:** "Users who turned on feature X spend 10% more. We
 weighted the users without X to look like the users with X, using a
 propensity score, and the gap is still 10%. Is that the effect of X?"
+
+## <u>Module 6 — Difference-in-Differences</u>
+
+**Overlap with the A/B Testing Playbook:** the basic DiD idea is recapped
+in this module, with a pointer to the Playbook's Module 8.
+The basic two-group, two-period comparison on
+made-up numbers with a known effect is in
+[A/B Testing Playbook, Module 8, Part 2](https://github.com/omri-sabag83/A-B-Testing-Playbook/blob/main/08_quasi_experiments.ipynb).
+This module adds real data, a check of the key assumption against a known
+answer, DiD combined with weighting, and changes that start in different
+years.
+
+**Concepts**
+- DiD (difference-in-differences): compare how much each group's mean
+  outcome changed from before to after, not the outcome itself.
+  DiD ATT (average treatment effect on the treated: the program's effect on
+  the men who took it) = (treated men's mean change) − (comparison men's
+  mean change).
+- What DiD removes: a gap between the two groups' earnings that is the same
+  size before the program and after the program. The gap is still there in
+  each period, but DiD measures only how much the gap changed. The analyst
+  doesn't need to know why the gap is there.
+- Parallel trends: without the program, the treated men's mean earnings
+  would have changed by the same number of dollars as the comparison men's.
+- The before-program check: did the two groups' earnings change alike
+  between two years before the program? Passing it doesn't prove
+  parallel trends.
+- DiD with weighting: DiD on comparison men given weights (Module 5), so that
+  as a group they look like the treated men before the program.
+- Changes that start in different years (staggered adoption): one DiD per
+  start-year group against the groups that never changed, the event study
+  (the per-group DiD, computed year by year), and the one-regression shortcut (a
+  single regression with one column per state and one per year, the usual
+  tool).
+
+**Why it matters**
+DiD is the usual tool when a change reaches some groups and not others,
+and there is data from before and after the change. DiD removes a gap
+between the groups that is the same size before and after, and the analyst
+doesn't need to know why the gap is there. DiD rests on parallel trends,
+which usually can't be checked directly after the change. So the analyst
+has to know when parallel trends is likely to fail.
+
+**Worked example**
+1. NSW (National Supported Work) job-training data vs the PSID (Panel Study
+   of Income Dynamics) men: DiD from 1975 to 1978, the before-program check,
+   and a check of parallel trends against the applicants a lottery kept out
+   of the program.
+2. DiD with weighting on the same data, next to DiD and weighting alone.
+3. Castle-doctrine laws (laws that remove the duty to retreat before using
+   deadly force in self-defence outside the home), passed by 21 US states in
+   different years (2005–2009): one DiD per group, an event study, and the one-regression
+   shortcut.
+
+**Resources**
+- [Causal Inference: The Mixtape, ch. 9 "Difference-in-Differences"](https://mixtape.scunning.com/09-difference_in_differences)
+  (Scott Cunningham, ~60 min for sections 9.2–9.5, verified): the basic
+  DiD calculation, parallel trends, event studies, and the
+  same castle-doctrine data.
+- [The Effect, ch. 18 "Difference-in-Differences"](https://theeffectbook.net/ch-DifferenceinDifference.html)
+  (Nick Huntington-Klein, ~60 min, verified): parallel trends, rollout
+  designs with several start years (18.2.6, 18.3.1) and picking the
+  comparison group by matching: pairing each treated unit with the most
+  similar untreated one, as in Module 4 (18.3.2).
+
+**Exercise type:** redo DiD, the before-program check, the lottery check and
+DiD with weighting with the CPS (Current Population Survey, a monthly US labour
+survey) comparison group. Fully worked.
+
+**Interview angle:** "We launched feature X in the markets where spend had
+dipped. Spend there rose 8% the next month, against 3% in the other
+markets. Is X worth 5 points?"
