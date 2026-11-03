@@ -19,7 +19,7 @@ Where a module here overlaps them, it recaps and links instead of rebuilding.
 
 ## Progress
 
-`🟩🟩🟩🟩🟩🟩⬜⬜⬜⬜⬜` **55% complete (6/11 modules)**
+`🟩🟩🟩🟩🟩🟩🟩🟩⬜⬜⬜` **73% complete (8/11 modules)**
 
 ⬜ Not started · 🟨 In progress · 🟩 Completed
 
@@ -32,7 +32,7 @@ Where a module here overlaps them, it recaps and links instead of rebuilding.
 | 5 | Weighting: IPW (Inverse Probability Weighting) and Doubly Robust | NSW job training (shared) | 🟩 Completed | 2026-10-27 |
 | 6 | Difference-in-Differences | NSW job training (shared) + castle-doctrine panel | 🟩 Completed | 2026-11-01 |
 | 7 | Instrumental Variables | Card (1995) college proximity | 🟩 Completed | 2026-11-03 |
-| 8 | Regression Discontinuity Design | Minimum legal drinking age | ⬜ Not started | |
+| 8 | Regression Discontinuity Design | Minimum legal drinking age | 🟩 Completed | 2026-11-03 |
 | 9 | Synthetic Control | California Proposition 99 | ⬜ Not started | |
 | 10 | Sensitivity, Placebo & Falsification Tests | Simulation + reused datasets | ⬜ Not started | |
 | 11 | Capstone: Which Method When | All modules | ⬜ Not started | |
@@ -440,3 +440,52 @@ living near a two-year college. Fully worked.
 sent half of them an email promoting feature X. The email group spent $2 more
 per user, and 10 percentage points more of the email group used feature X. What
 does feature X add to spend?"
+
+## <u>Module 8 — Regression Discontinuity Design</u>
+
+**Concepts**
+- Cutoff: the value of a column at which a rule switches on for everyone.
+  Here, the column is age and the cutoff is 21, the minimum legal drinking age
+  in the US.
+- RDD (regression discontinuity design): a regression line on each side of the
+  cutoff. The jump = (line above the cutoff) − (line below the cutoff), both
+  read at the cutoff. The jump is the effect of the rule.
+- The no-other-change rule: nothing else that affects the outcome may change at
+  the cutoff. The data can look for other changes, but can't prove this rule.
+- Bandwidth: how far from the cutoff the data reaches. A narrower bandwidth
+  relies less on straight lines, and usually gives a wider confidence interval.
+- Fake cutoffs: the same calculation at a value where no rule changes. A jump
+  there that chance can't explain would mean the method finds jumps that
+  aren't real.
+- The density check: when people can choose their side of a cutoff, count the
+  people just below and just above the cutoff. "Density" means how many people
+  sit at each value. Many more people on one side than on the other shows that
+  people chose.
+
+**Why it matters**
+Many rules switch on at a threshold: an age, a test score, an order size.
+People just below and just above a threshold are alike, so a gap in the
+outcome at the threshold comes from the rule. The price: the jump describes
+only people near the cutoff, and the no-other-change rule can't be proved.
+
+**Worked example**
+US death rates by age, from 19 to 23, from a 2009 study by Christopher
+Carpenter and Carlos Dobkin. The jump in deaths at 21, the jump's 95% confidence
+interval, three bandwidths, fake cutoffs at 20 and 22, and deaths from disease
+against deaths from outside causes.
+
+**Resources**
+- [Causal Inference: The Mixtape, ch. 6 "Regression Discontinuity"](https://mixtape.scunning.com/06-regression_discontinuity)
+  (Scott Cunningham, ~90 min, verified): the method's rules (6.2), estimation
+  and bandwidths (6.3), and the density check (6.4).
+- [The Effect, ch. 20 "Regression Discontinuity"](https://theeffectbook.net/ch-RegressionDiscontinuity.html)
+  (Nick Huntington-Klein, ~60 min, verified): RDD with a regression (20.2.1),
+  fake cutoffs (20.2.3), the density check (20.2.4), and bandwidths (20.3.4).
+- [A/B Testing Playbook, Module 8, Part 4](https://github.com/omri-sabag83/A-B-Testing-Playbook/blob/main/08_quasi_experiments.ipynb):
+  a short version of the same idea on made-up data.
+
+**Exercise type:** the jump at 21 in deaths from motor vehicle accidents.
+Fully worked.
+
+**Interview angle:** "Orders of $50 or more get free shipping. Did free
+shipping make customers order again?"
