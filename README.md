@@ -17,6 +17,7 @@ The program, progress table and per-module detail are in
 | 4 | `04_matching.ipynb` | Propensity score matching, overlap, balance checks, matching vs regression | NSW + PSID + CPS |
 | 5 | `05_weighting.ipynb` | Inverse probability weighting, where the weight goes, doubly robust | NSW + PSID + CPS |
 | 6 | `06_difference_in_differences.ipynb` | DiD, parallel trends checked against the lottery, DiD with weighting, laws passed in different years | NSW + PSID + CPS + castle-doctrine state panel |
+| 7 | `07_instrumental_variables.ipynb` | Instrumental variables, 2SLS, the F-statistic for instrument strength, the no-other-way rule | Card (1995) college proximity |
 
 Related repos: [A/B Testing Playbook](https://github.com/omri-sabag83/A-B-Testing-Playbook),
 [Product Analytics Playbook](https://github.com/omri-sabag83/Product-Analytics-Playbook),

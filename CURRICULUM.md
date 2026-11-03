@@ -30,8 +30,8 @@ Where a module here overlaps them, it recaps and links instead of rebuilding.
 | 3 | Confounding & Regression Adjustment | NSW job training (shared) | 🟩 Completed | 2026-10-26 |
 | 4 | Matching, incl. Propensity Score Matching | NSW job training (shared) | 🟩 Completed | 2026-10-27 |
 | 5 | Weighting: IPW (Inverse Probability Weighting) and Doubly Robust | NSW job training (shared) | 🟩 Completed | 2026-10-27 |
-| 6 | Difference-in-Differences | NSW job training (shared) + castle-doctrine panel | 🟩 Completed | |
-| 7 | Instrumental Variables | Card (1995) college proximity | ⬜ Not started | |
+| 6 | Difference-in-Differences | NSW job training (shared) + castle-doctrine panel | 🟩 Completed | 2026-11-01 |
+| 7 | Instrumental Variables | Card (1995) college proximity | 🟩 Completed | 2026-11-03 |
 | 8 | Regression Discontinuity Design | Minimum legal drinking age | ⬜ Not started | |
 | 9 | Synthetic Control | California Proposition 99 | ⬜ Not started | |
 | 10 | Sensitivity, Placebo & Falsification Tests | Simulation + reused datasets | ⬜ Not started | |
@@ -393,3 +393,50 @@ survey) comparison group. Fully worked.
 **Interview angle:** "We launched feature X in the markets where spend had
 dipped. Spend there rose 8% the next month, against 3% in the other
 markets. Is X worth 5 points?"
+
+## <u>Module 7 — Instrumental Variables</u>
+
+**Concepts**
+- Instrument: something that changes how much of a treatment people get, and
+  affects the outcome only through that treatment. Here, the treatment is
+  schooling, the outcome is pay, and the instrument is living near a college.
+- The schooling rule: the instrument must change how much schooling men get.
+  The data can check this rule.
+- The no-other-way rule: the instrument must affect pay only through schooling.
+  The data can look for other routes, but can't prove this rule.
+- 2SLS (two-stage least squares): two regressions that give one pay number for
+  a year of schooling. 2SLS estimate = (pay gap) ÷ (schooling gap), both between
+  men with the instrument and men without the instrument.
+- The F-statistic: how many standard errors the schooling gap is above 0,
+  squared. The usual pass mark is 10.
+- Which men the 2SLS estimate describes: only men who stay in school longer when a
+  college is close, assuming a close college never shortens schooling.
+
+**Why it matters**
+Comparing men with more and less schooling mixes the effect of schooling with
+the effect of ability, and the data measures ability only in part. An instrument
+gives a number without an ability column. The price is a rule that can't be
+proved, an interval wider than the plain regression's, and a 2SLS estimate that
+describes only some men.
+
+**Worked example**
+Data from David Card's 1995 study: 3,010 US men in 1976, with living near a
+four-year college in 1966 as the instrument. A regression of pay on
+schooling, the instrument's calculation, 2SLS with the city column in both
+regressions, the F-statistic, and a check of the no-other-way rule using region.
+
+**Resources**
+- [Causal Inference: The Mixtape, ch. 7 "Instrumental Variables"](https://mixtape.scunning.com/07-instrumental_variables)
+  (Scott Cunningham, ~120 min, verified): two-stage least squares (7.3), weak
+  instruments (7.4), and which people the number describes (7.5).
+- [The Effect, ch. 19 "Instrumental Variables"](https://theeffectbook.net/ch-InstrumentalVariables.html)
+  (Nick Huntington-Klein, ~60 min, verified): the two rules (19.1.2) and how
+  2SLS is run (19.2).
+
+**Exercise type:** redo 2SLS with a different instrument from the same data,
+living near a two-year college. Fully worked.
+
+**Interview angle:** "We can't force users to adopt feature X, but we randomly
+sent half of them an email promoting feature X. The email group spent $2 more
+per user, and 10 percentage points more of the email group used feature X. What
+does feature X add to spend?"
