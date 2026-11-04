@@ -19,6 +19,7 @@ The program, progress table and per-module detail are in
 | 6 | `06_difference_in_differences.ipynb` | DiD, parallel trends checked against the lottery, DiD with weighting, laws passed in different years | NSW + PSID + CPS + castle-doctrine state panel |
 | 7 | `07_instrumental_variables.ipynb` | Instrumental variables, 2SLS, the F-statistic for instrument strength, the no-other-way rule | Card (1995) college proximity |
 | 8 | `08_regression_discontinuity.ipynb` | Regression discontinuity, the jump at a cutoff, bandwidths, fake cutoffs, the no-other-change rule | Minimum legal drinking age (Carpenter and Dobkin, 2009) |
+| 9 | `09_synthetic_control.ipynb` | Synthetic control, fit before the law, placebo states, leave-one-out, a fake law year | California Proposition 99 cigarette sales (Abadie, Diamond and Hainmueller, 2010) |
 
 Related repos: [A/B Testing Playbook](https://github.com/omri-sabag83/A-B-Testing-Playbook),
 [Product Analytics Playbook](https://github.com/omri-sabag83/Product-Analytics-Playbook),

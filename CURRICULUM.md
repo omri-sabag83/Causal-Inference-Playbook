@@ -19,7 +19,7 @@ Where a module here overlaps them, it recaps and links instead of rebuilding.
 
 ## Progress
 
-`🟩🟩🟩🟩🟩🟩🟩🟩⬜⬜⬜` **73% complete (8/11 modules)**
+`🟩🟩🟩🟩🟩🟩🟩🟩🟩⬜⬜` **82% complete (9/11 modules)**
 
 ⬜ Not started · 🟨 In progress · 🟩 Completed
 
@@ -33,7 +33,7 @@ Where a module here overlaps them, it recaps and links instead of rebuilding.
 | 6 | Difference-in-Differences | NSW job training (shared) + castle-doctrine panel | 🟩 Completed | 2026-11-01 |
 | 7 | Instrumental Variables | Card (1995) college proximity | 🟩 Completed | 2026-11-03 |
 | 8 | Regression Discontinuity Design | Minimum legal drinking age | 🟩 Completed | 2026-11-03 |
-| 9 | Synthetic Control | California Proposition 99 | ⬜ Not started | |
+| 9 | Synthetic Control | California Proposition 99 | 🟩 Completed | 2026-11-04 |
 | 10 | Sensitivity, Placebo & Falsification Tests | Simulation + reused datasets | ⬜ Not started | |
 | 11 | Capstone: Which Method When | All modules | ⬜ Not started | |
 
@@ -489,3 +489,63 @@ Fully worked.
 
 **Interview angle:** "Orders of $50 or more get free shipping. Did free
 shipping make customers order again?"
+
+## <u>Module 9 — Synthetic Control</u>
+
+**Concepts**
+- Treated state: the one state a law covers. Here, California and its tobacco
+  law, Proposition 99.
+- Donor states: states without such a law, from which the stand-in for the
+  treated state is built. Here, 38 US states.
+- Synthetic control: a weighted mean of the donor states' sales. The weights
+  are 0 or more, add up to 1, and give the smallest gaps to the treated state's
+  sales before the law. After the law, gap = (treated state's sales) −
+  (synthetic control's sales) estimates the law's effect.
+- Size of the gap before the law: one number for how close the synthetic
+  control's sales stay to the treated state's sales before the law. A synthetic
+  control that doesn't stay close before the law can't stand in for the
+  treated state after the law.
+- Placebo states: the same calculation for each donor state, as if that state
+  had passed the law. Each state's ratio = (size of the gap after the law) ÷
+  (size of the gap before the law). If the law did nothing, the treated state
+  is one state among all of them, so the treated state's rank among all the
+  ratios shows how likely chance alone is to produce a ratio that high.
+- Leave-one-out: rebuild the synthetic control without each donor state that
+  has a weight, one state at a time. The estimate shouldn't rest on one state.
+- Fake law year: the same calculation with a law year at which nothing
+  happened, fitted only on the years before that fake year. A large gap after
+  the fake year would mean the method finds gaps that don't come from the law.
+
+**Why it matters**
+Many changes hit one unit only: a law in one state, a price change in one
+country, a launch in one city. No similar unit is left untouched for a plain
+comparison. Synthetic control builds the comparison from a mix of untouched
+units. The price: with one treated unit, chance is judged only by ranking it
+among the placebo units, and the number of units limits how small the chance
+of a gap that large with no law can get.
+
+**Worked example**
+Cigarette sales per person in 39 US states, 1970–2000, from a 2010 study by
+Alberto Abadie, Alexis Diamond and Jens Hainmueller. Synthetic California, its
+fit before 1989, the gap from 1989 to 2000, placebo states, leave-one-out,
+and a fake law year in 1980.
+
+**Resources**
+- [Causal Inference: The Mixtape, ch. 11 "Synthetic Control"](https://mixtape.scunning.com/11-synthetic_control)
+  (Scott Cunningham, ~90 min for section 11.1, verified): the method
+  ("Formalization"), the Proposition 99 example, and placebo states
+  ("Inference with Synthetic Control").
+- [The Effect, ch. 22 "A Gallery of Rogues: Other Methods"](https://theeffectbook.net/ch-TheEdge.html)
+  (Nick Huntington-Klein, ~20 min for section 22.2.1 "Synthetic Control",
+  verified): the method and placebo tests in short.
+- [A/B Testing Playbook, Module 8, Part 2](https://github.com/omri-sabag83/A-B-Testing-Playbook/blob/main/08_quasi_experiments.ipynb):
+  a shipping-fee change in 5 states compared with 5 similar states by
+  difference-in-differences, on made-up numbers. Synthetic control replaces
+  that comparison group when no group of untouched states moves like the
+  treated one.
+
+**Exercise type:** Virginia, a placebo state that ranked above California: its
+gap by hand, and what a ranking of 39 states can show at best. Fully worked.
+
+**Interview angle:** "A food-delivery app raised its delivery fee in one city
+only. Did the fee cut orders in that city?"
