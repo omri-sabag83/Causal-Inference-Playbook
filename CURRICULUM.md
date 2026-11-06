@@ -19,7 +19,7 @@ Where a module here overlaps them, it recaps and links instead of rebuilding.
 
 ## Progress
 
-`🟩🟩🟩🟩🟩🟩🟩🟩🟩⬜⬜` **82% complete (9/11 modules)**
+`🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩⬜` **91% complete (10/11 modules)**
 
 ⬜ Not started · 🟨 In progress · 🟩 Completed
 
@@ -34,7 +34,7 @@ Where a module here overlaps them, it recaps and links instead of rebuilding.
 | 7 | Instrumental Variables | Card (1995) college proximity | 🟩 Completed | 2026-11-03 |
 | 8 | Regression Discontinuity Design | Minimum legal drinking age | 🟩 Completed | 2026-11-03 |
 | 9 | Synthetic Control | California Proposition 99 | 🟩 Completed | 2026-11-04 |
-| 10 | Sensitivity, Placebo & Falsification Tests | Simulation + reused datasets | ⬜ Not started | |
+| 10 | Sensitivity, Placebo & Falsification Tests | NSW job training (shared) | 🟩 Completed | 2026-11-06 |
 | 11 | Capstone: Which Method When | All modules | ⬜ Not started | |
 
 ---
@@ -549,3 +549,63 @@ gap by hand, and what a ranking of 39 states can show at best. Fully worked.
 
 **Interview angle:** "A food-delivery app raised its delivery fee in one city
 only. Did the fee cut orders in that city?"
+
+## <u>Module 10 — Sensitivity, Placebo & Falsification Tests</u>
+
+**Concepts**
+- Placebo outcome (a falsification test): an outcome the program couldn't
+  have changed, such as earnings in a year before the program. The method's
+  estimate of the effect on that outcome should be 0. An estimate whose 95%
+  confidence interval leaves out 0 shows that the comparison group differs
+  from the men who took the program in ways the columns don't capture.
+- A stand-in group: a group that didn't get the program but stands in for the
+  men who took it, such as applicants a lottery kept out. The method's
+  estimate of the "effect" between the stand-in group and the comparison group
+  should be 0, and any estimate is an estimate of the method's bias.
+- Move from leaving out a column: how far an estimate moves when one column is left
+  out of the regression. Move = (the column's coefficient in the full
+  regression) × (the column difference: the difference in that column between
+  the men who took the program and the comparison group, holding the other columns
+  fixed).
+- Sensitivity to a missing column: the columns in the data show how far one
+  column can move the estimate. A column the data doesn't have could move the
+  estimate as far. An estimate that one such column could erase is fragile.
+
+**Why it matters**
+Outside an experiment, the right answer is never known, so an estimate can't
+be checked against it. These checks need no right answer: they ask whether the
+method finds effects where none can exist, and how far a missing column could
+move the estimate. No check proves an estimate right. A failed check shows a
+reason to doubt it, and a passed check shows only that the check couldn't find
+a problem.
+
+**Worked example**
+The NSW (National Supported Work) job-training program, with the PSID (Panel
+Study of Income Dynamics) men as the comparison group, where the right answer
+is known from the program's lottery. A regression estimate of the program's
+effect on 1978 earnings, then three checks with the right answer hidden: a
+placebo outcome (1975 earnings), a stand-in group (the lottery men against
+the PSID men), and the move from leaving out each column. Finally, the
+checks against the right answer.
+
+**Resources**
+- [The Effect, ch. 8 "Causal Paths and Closing Back Doors"](https://theeffectbook.net/ch-CausalPaths.html)
+  (Nick Huntington-Klein, ~20 min for section 8.6 "Using Paths to Test Your
+  Diagram", verified): placebo tests, which epidemiology calls falsification
+  tests.
+- [The Effect, ch. 13 "Regression"](https://theeffectbook.net/ch-StatisticalAdjustment.html)
+  (Nick Huntington-Klein, ~15 min for section 13.1.2 "Regression Assumptions
+  and Sampling Variation", verified): omitted variable bias, the move from
+  leaving out a column.
+- [Cinelli and Hazlett (2020), "Making Sense of Sensitivity: Extending Omitted Variable Bias"](https://doi.org/10.1111/rssb.12348)
+  (Journal of the Royal Statistical Society, Series B, verified): the standard
+  modern method for sensitivity to a missing column, including comparing a
+  missing column with the columns in the data.
+
+**Exercise type:** the same three checks with the CPS (Current Population
+Survey) men as the comparison group, then the checks against the right answer.
+Fully worked.
+
+**Interview angle:** "Matching says users who turned on feature X spend 8%
+more. An experiment isn't possible. How would you decide whether to trust the
+8%?"
