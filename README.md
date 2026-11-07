@@ -21,6 +21,7 @@ The program, progress table and per-module detail are in
 | 8 | `08_regression_discontinuity.ipynb` | Regression discontinuity, the jump at a cutoff, bandwidths, fake cutoffs, the no-other-change rule | Minimum legal drinking age (Carpenter and Dobkin, 2009) |
 | 9 | `09_synthetic_control.ipynb` | Synthetic control, fit before the law, placebo states, leave-one-out, a fake law year | California Proposition 99 cigarette sales (Abadie, Diamond and Hainmueller, 2010) |
 | 10 | `10_sensitivity_placebo_falsification.ipynb` | Checks that need no right answer: a placebo outcome, a stand-in group, the move from leaving out a column | NSW + PSID + CPS |
+| 11 | `11_which_method_when.ipynb` | Capstone: seven methods against the right answer with two comparison groups, and a guide from the data's shape to the method, its assumption and its check | NSW + PSID + CPS |
 
 Related repos: [A/B Testing Playbook](https://github.com/omri-sabag83/A-B-Testing-Playbook),
 [Product Analytics Playbook](https://github.com/omri-sabag83/Product-Analytics-Playbook),

@@ -19,7 +19,7 @@ Where a module here overlaps them, it recaps and links instead of rebuilding.
 
 ## Progress
 
-`🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩⬜` **91% complete (10/11 modules)**
+`🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩🟩` **100% complete (11/11 modules)**
 
 ⬜ Not started · 🟨 In progress · 🟩 Completed
 
@@ -35,7 +35,7 @@ Where a module here overlaps them, it recaps and links instead of rebuilding.
 | 8 | Regression Discontinuity Design | Minimum legal drinking age | 🟩 Completed | 2026-11-03 |
 | 9 | Synthetic Control | California Proposition 99 | 🟩 Completed | 2026-11-04 |
 | 10 | Sensitivity, Placebo & Falsification Tests | NSW job training (shared) | 🟩 Completed | 2026-11-06 |
-| 11 | Capstone: Which Method When | All modules | ⬜ Not started | |
+| 11 | Capstone: Which Method When | NSW job training (shared) | 🟩 Completed | 2026-11-07 |
 
 ---
 
@@ -609,3 +609,70 @@ Fully worked.
 **Interview angle:** "Matching says users who turned on feature X spend 8%
 more. An experiment isn't possible. How would you decide whether to trust the
 8%?"
+
+---
+
+## <u>Module 11 — Capstone: Which Method When</u>
+
+**Concepts**
+
+This notebook has two parts.
+- Part 1, the scoreboard: grades methods against the right answer. Grading
+  needs a right answer, and of the playbook's five datasets, only the
+  job-training data has one, from its lottery.
+- Part 2, the guide: helps choose a method. In real life there is no right
+  answer, so the choice comes from the data's shape.
+
+| Method | Data shape it needs | Part 1: graded | Part 2: in the guide | Why |
+|---|---|---|---|---|
+| Randomized experiment | units the analyst can split by chance | no | yes | it is the right answer |
+| Naive gap | any two groups | yes | no | the starting line, with no correction |
+| Regression adjustment | columns measured before the treatment | yes | yes | |
+| Matching | the same | yes | yes | |
+| Weighting | the same | yes | yes | |
+| Doubly robust (regression adjustment with weighting) | the same | yes | yes | |
+| DiD | the outcome measured before and after, for both groups | yes | yes | |
+| DiD with weighting | the same | yes | yes | in the guide, a version of DiD |
+| IV (instrumental variables) | an instrument: something that changes who gets the treatment and affects the outcome in no other way | no | yes | the job-training data has no instrument |
+| RDD (regression discontinuity design) | a cutoff on a score that decides who gets the treatment | no | yes | the job-training data has no cutoff |
+| Synthetic control | one treated unit and many untreated units | no | yes | the job-training data has no single treated unit |
+
+Each method in Part 1 runs once with each of the two comparison groups.
+
+- The right answer's own uncertainty: the right answer is itself an estimate
+  from 185 treated men and 260 lottery men, so it has a 95% confidence
+  interval. A method's estimate that lands inside that interval can't be shown
+  wrong by the right answer, because the true effect could be anywhere inside
+  the interval, even at the method's estimate.
+- Each method's assumption: what must be true for the method's estimate to
+  have no bias, and the check that can test it.
+
+**Why it matters**
+No method is right everywhere. The method closest to the right answer with
+one comparison group isn't the closest with another, and a method's
+assumption can hold with one comparison group and fail with another. So an analyst picks the methods
+the data's shape allows, runs each, and trusts an estimate only as far as its
+method's assumption survives its checks.
+
+**Worked example**
+The NSW (National Supported Work) job-training program, with two comparison
+groups: the PSID (Panel Study of Income Dynamics) men and the CPS (Current
+Population Survey) men. Seven methods on each group, the scoreboard against
+the right answer, then a guide that maps each data shape to its method, its
+assumption and its check.
+
+**Resources**
+- [LaLonde (1986), "Evaluating the Econometric Evaluations of Training Programs with Experimental Data"](https://www.jstor.org/stable/1806062)
+  (American Economic Review 76(4), link checked): the paper that first ran
+  non-experimental methods on the NSW data against the lottery's answer.
+- [Imbens and Xu (2024), "LaLonde (1986) after Nearly Four Decades: Lessons Learned"](https://arxiv.org/abs/2406.00827)
+  (arXiv, link checked; later retitled "Comparing Experimental and
+  Nonexperimental Methods"): what four decades of methods on the same data
+  taught. First among them: overlap, meaning that each man who took the
+  program has similar men who didn't.
+
+**Exercise type:** five product cases, each with its data described. For each,
+pick the method, say what must be true, and name the check. Fully worked.
+
+**Interview angle:** "Two methods on the same data give 2% and 9%. Which one
+do you report?"
