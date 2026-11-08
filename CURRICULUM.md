@@ -55,6 +55,11 @@ variable with a cutoff, one treated unit plus a pool of untreated ones), so
 each uses a classic dataset built for it. Each module states the one-line
 reason.
 
+**Back to the NSW data for Modules 10–11:** Module 10 checks the estimates
+without using the right answer. Module 11 grades every method against the
+right answer, with a second comparison group, the CPS (Current Population
+Survey) men, next to the PSID men.
+
 **Each module has:** concepts, why it matters, at least one worked example on
 real numbers, and key takeaways. Findings are tagged Observation / Hypothesis
 / Conclusion.
@@ -62,8 +67,6 @@ real numbers, and key takeaways. Findings are tagged Observation / Hypothesis
 ---
 
 ## Modules
-
-Each module's detail is set when it is built.
 
 ## <u>Module 1 — Potential Outcomes Framework</u>
 
@@ -82,10 +85,11 @@ This module adds the formal notation and puts real numbers on it.
   line
 - Why randomization sets selection bias to zero on average
 - Without randomization, two assumptions take its place:
-  1. Unconfoundedness: men who looked the same before the program would have
-     earned the same without it, whether they took it or not.
+  1. Unconfoundedness: men who looked the same as each other before the
+     program would have earned the same as each other without it, whether
+     they took it or not.
   2. Overlap: for every man who took the program, there are men who did not
-     take it and who looked like him before.
+     take it and who looked like him before the program.
 - SUTVA (stable unit treatment value assumption): no interference, one version
   of the treatment
 
@@ -105,7 +109,7 @@ method's assumptions cannot be stated.
    (zero 1975 earnings, unmarried, black).
 
 **Resources**
-- [Causal Inference: The Mixtape, ch. 4 "Potential Outcomes Causal Model"](https://mixtape.scunning.com/04-Potential_Outcomes_and_Randomization.html)
+- [Causal Inference: The Mixtape, ch. 3 "Potential Outcomes and Randomization"](https://mixtape.scunning.com/03-potential_outcomes_and_randomization)
   (Scott Cunningham, ~45 min, verified): the notation, the decomposition and SUTVA.
 - [The Effect, ch. 10 "Treatment Effects"](https://theeffectbook.net/ch-TreatmentEffects.html)
   (Nick Huntington-Klein, ~30 min, verified): ATE vs ATT and heterogeneous effects.
@@ -153,7 +157,7 @@ which columns to adjust for, before any number is computed.
    in 1978 shrinks $1,794.3 to $1,340.8.
 
 **Resources**
-- [Causal Inference: The Mixtape, ch. 3 "Directed Acyclic Graphs"](https://mixtape.scunning.com/03-Directed_Acyclical_Graphs.html)
+- [Causal Inference: The Mixtape, ch. 4 "Directed Acyclic Graphs"](https://mixtape.scunning.com/04-directed_acyclical_graphs)
   (Scott Cunningham, ~45 min, verified): drawing DAGs, confounders, colliders.
 - [The Effect, ch. 8 "Causal Paths and Closing Back Doors"](https://theeffectbook.net/ch-CausalPaths.html)
   (Nick Huntington-Klein, ~40 min, verified): which columns to adjust for,
@@ -284,8 +288,7 @@ more. Is that the effect of X?"
   2. The earnings formula: regression adjustment's straight-line formula,
      fitted on the comparison men, which predicts each treated man's 1978
      earnings without the program (Module 3).
-
-  The doubly robust estimate is regression adjustment's estimate minus
+- The doubly robust estimate is regression adjustment's estimate minus
   the earnings formula's weighted mean miss (actual − predicted earnings)
   on the comparison men. It gets the right answer, apart from chance, if
   either formula is right.

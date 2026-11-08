@@ -1,6 +1,6 @@
 """Shared loaders, chart settings and table printing for every module.
 
-load_lalonde()  NSW treated units plus a comparison group ("experimental", "psid" or "cps"), Modules 1-6
+load_lalonde()  NSW treated units plus a comparison group ("experimental", "psid" or "cps"), Modules 1-6, 10-11
 show()          print a table with text columns left-aligned, numbers right-aligned
 draw_dag()      draw a causal diagram (boxes and arrows) on a matplotlib axis, Module 2 onwards
 """
